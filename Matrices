@@ -1,0 +1,149 @@
+package matrices;
+
+
+public class Matrices {
+    
+    public static void main(String[] args) {
+        // Ejemplo de uso de los métodos
+        int[][] a = {{1,2},{3,4}};
+        int[][] b = {{5,6},{7,8}};
+        int[][] c = multiplicarMatrices(a, b);
+        int[][] d = transponerMatriz(a);
+        int sumaDiagonal = sumarDiagonalPrincipal(a);
+        int maximoValor = encontrarMaximoValor(a);
+        int[][] e = sumarMatrices(a, b);
+        int[][] f = multiplicarMatrizPorEscalar(a, 3);
+        
+        // Mostrando los resultados
+        System.out.println("Multiplicación de matrices: ");
+        mostrarMatriz(c);
+        System.out.println("Transpuesta de matriz: ");
+        mostrarMatriz(d);
+        System.out.println("Suma de la diagonal principal: " + sumaDiagonal);
+        System.out.println("Valor máximo de la matriz: " + maximoValor);
+        System.out.println("Suma de matrices: ");
+        mostrarMatriz(e);
+        System.out.println("Multiplicación de matriz por escalar: ");
+        mostrarMatriz(f);
+    }
+    
+    public static void mostrarMatriz(int[][] matriz) {
+        if (matriz == null) {
+            System.out.println("La matriz es nula");
+            return;
+        }
+        
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[0].length; j++) {
+                System.out.print(matriz[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+
+		
+	
+
+    public static int[][] multiplicarMatrizPorEscalar(int[][] a, int escalar) {
+        int fila = a.length;
+        int columna = a[0].length;
+        int[][] resultado = new int[fila][columna];
+
+        for (int i = 0; i < fila; i++) {
+            for (int j = 0; j < columna; j++) {
+                resultado[i][j] = a[i][j] * escalar;
+            }
+        }
+
+        return resultado;
+    }
+
+	
+
+    public static int[][] sumarMatrices(int[][] a, int[][] b) {
+        int filaA = a.length;
+        int columnaA = a[0].length;
+        int filaB = b.length;
+        int columnaB = b[0].length;
+
+        if (filaA != filaB || columnaA != columnaB) {
+            throw new IllegalArgumentException("Las matrices deben tener las mismas dimensiones para sumarse");
+        }
+
+        int[][] resultado = new int[filaA][columnaA];
+
+        for (int i = 0; i < filaA; i++) {
+            for (int j = 0; j < columnaA; j++) {
+                resultado[i][j] = a[i][j] + b[i][j];
+            }
+        }
+
+        return resultado;
+    }
+
+	
+
+	public static int[][] multiplicarMatrices(int[][] a, int[][] b) {
+        int filaA = a.length;
+        int columnaA = a[0].length;
+        int filaB = b.length;
+        int columnaB = b[0].length;
+        
+        if (columnaA != filaB) {
+            throw new IllegalArgumentException("Las matrices no son compatibles para multiplicarse");
+        }
+        
+        int[][] resultado = new int[filaA][columnaB];
+        
+        for (int i = 0; i < filaA; i++) {
+            for (int j = 0; j < columnaB; j++) {
+                for (int k = 0; k < columnaA; k++) {
+                    resultado[i][j] += a[i][k] * b[k][j];
+                }
+            }
+        }
+        
+        return resultado;
+    }
+    
+    public static int[][] transponerMatriz(int[][] a) {
+        int fila = a.length;
+        int columna = a[0].length;
+        
+        int[][] resultado = new int[columna][fila];
+        
+        for (int i = 0; i < fila; i++) {
+            for (int j = 0; j < columna; j++) {
+                resultado[j][i] = a[i][j];
+            }
+        }
+        
+        return resultado;
+    }
+    
+    public static int sumarDiagonalPrincipal(int[][] a) {
+        int suma = 0;
+        
+        for (int i = 0; i < a.length; i++) {
+            suma += a[i][i];
+        }
+        
+        return suma;
+    }
+    
+    public static int encontrarMaximoValor(int[][] a) {
+        int maximo = a[0][0];
+        
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < a[0].length; j++) {
+                if (a[i][j] > maximo) {
+                    maximo = a[i][j];
+                }
+            }
+        }
+        
+        return maximo;
+    }
+
+}
