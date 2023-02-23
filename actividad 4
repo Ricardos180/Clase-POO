@@ -1,0 +1,60 @@
+package actividad_tres;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        try (Scanner scanner = new Scanner(System.in)) {
+			System.out.print("¿Qué figura quieres hacer? (cuadrado/circulo): ");
+			String figura = scanner.nextLine();
+
+			if (figura.equalsIgnoreCase("cuadrado")) {
+			    System.out.print("¿Cuánto mide el lado del cuadrado?: ");
+			    int lado = scanner.nextInt();
+			    scanner.nextLine(); 
+			    System.out.print("¿Qué quieres calcular? (diagonal/perimetro/area): ");
+			    String opcion = scanner.nextLine();
+
+			    cuadrado cuadrado = new cuadrado(lado);
+			    switch (opcion.toLowerCase()) {
+			        case "diagonal":
+			            int diagonal = cuadrado.getDiagonal();
+			            System.out.println("La diagonal del cuadrado es: " + diagonal);
+			            break;
+			        case "perimetro":
+			            int perimetro = cuadrado.getPerimetro();
+			            System.out.println("El perímetro del cuadrado es: " + perimetro);
+			            break;
+			        case "area":
+			            int area = cuadrado.getArea();
+			            System.out.println("El área del cuadrado es: " + area);
+			            break;
+			        default:
+			            System.out.println("Opción inválida.");
+			    }
+			} else if (figura.equalsIgnoreCase("circulo")) {
+			    System.out.print("¿Cuánto mide el radio del círculo?: ");
+			    int radio = scanner.nextInt();
+			    scanner.nextLine(); 
+
+			    System.out.print("¿Qué quieres calcular? (circunferencia/area): ");
+			    String opcion = scanner.nextLine();
+
+			    circulo circulo = new circulo(radio);
+			    switch (opcion.toLowerCase()) {
+			        case "circunferencia":
+			            double circunferencia = circulo.getCircunferencia();
+			            System.out.println("La circunferencia del círculo es: " + circunferencia);
+			            break;
+			        case "area":
+			            double area = circulo.getArea();
+			            System.out.println("El área del círculo es: " + area);
+			            break;
+			        default:
+			            System.out.println("Opción inválida.");
+			    }
+			} else {
+			    System.out.println("Figura inválida.");
+			}
+		}
+    }
+}
