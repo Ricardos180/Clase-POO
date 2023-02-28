@@ -1,0 +1,70 @@
+package actividad_seisysiete;
+
+import java.util.Arrays;
+import java.util.Scanner;
+import actividad_tres.circulo;
+
+public class Arreglos {
+    public static void main(String[] args) {
+        int[] enteros = new int[15]; // Declara un arreglo de 15 enteros
+        String[] nombres = new String[20]; // Declara un arreglo que guarde 20 nombres
+        circulo[] circulos = new circulo[100]; // Declara un arreglo de 100 objetos de la clase "circulo"
+
+        
+        try (Scanner scanner = new Scanner(System.in)) {
+			System.out.println("Ingrese los valores para el arreglo de enteros:");
+			for (int i = 0; i < enteros.length; i++) {
+			    enteros[i] = scanner.nextInt();
+			}
+
+			
+			scanner.nextLine(); // Limpiar el buffer del scanner
+			System.out.println("Ingrese los nombres para el arreglo de nombres:");
+			for (int i = 0; i < nombres.length; i++) {
+			    nombres[i] = scanner.nextLine();
+			}
+		}
+        enteros[9] = 5; // Asigna un valor de 5 a la décima posición en el arreglo declarado que guarda enteros
+        nombres[0] = "Francisco"; // Inserta "Francisco" en la primer posición del arreglo declarado para guardar nombres
+        mostrarArreglo(enteros); // Muestra los contenidos del arreglo de enteros
+        mostrarArreglo(nombres); // Muestra los contenidos del arreglo de nombres
+        agregarCirculos(circulos); // Agrega 10 objetos de la clase Circulo al arreglo circulos
+        buscarValor(enteros, 5); // Busca el valor 5 en el arreglo de enteros
+        eliminarValor(nombres, "Francisco"); // Elimina el valor "Francisco" en el arreglo de nombres
+    }
+
+    public static void mostrarArreglo(int[] arreglo) {
+        if (arreglo == null) {
+            System.out.println("El arreglo es nulo");
+        } else {
+            System.out.println(Arrays.toString(arreglo));
+        }
+    }
+
+    public static void mostrarArreglo(String[] arreglo) {
+        if (arreglo == null) {
+            System.out.println("El arreglo es nulo");
+        } else {
+            System.out.println(Arrays.toString(arreglo));
+        }
+    }
+
+    public static void agregarCirculos(circulo[] arreglo) {
+        for (int i = 0; i < 10; i++) {
+            arreglo[i] = new circulo(i + 1);
+        }
+    }
+
+    public static void buscarValor(int[] arreglo, int valor) {
+        if (arreglo == null) {
+            System.out.println("El arreglo es nulo");
+        } else {
+            for (int i = 0; i < arreglo.length; i++) {
+                if (arreglo[i] == valor) {
+                    System.out.println("Se encontró el valor " + valor + " en la posición " + i + " del arreglo.");
+                    return;
+                }
+            }
+            System.out.println("No se encontró el valor " + valor + " en el arreglo.");
+        }
+    }
