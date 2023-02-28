@@ -1,0 +1,108 @@
+package actividad_seisysiete;
+
+import java.util.*;
+
+public class actvseis {
+
+    public static void main(String[] args) {
+        
+        // Ejemplo de uso del método de inserción en una cola
+        char[] queue = new char[5];
+        int tail = 0;
+        int max = 5;
+        insert(queue, tail, max, 'A');
+        insert(queue, tail, max, 'B');
+        insert(queue, tail, max, 'C');
+        insert(queue, tail, max, 'D');
+        System.out.println(remove(queue, tail));
+
+        // Ejemplo de uso del método pop de una pila
+        char[] stack = new char[5];
+        int top = 0;
+        push(stack, top, 'A');
+        push(stack, top, 'B');
+        push(stack, top, 'C');
+        push(stack, top, 'D');
+        System.out.println(pop(stack, top));
+
+        // Ejemplo de uso del método para invertir una cadena con una pila
+        String cadena = "hola";
+        System.out.println(invertirStringConStack(cadena));
+
+        // Ejemplo de uso del método para verificar si una cadena es palíndromo con una pila
+        String palindromo = "ana";
+        String noPalindromo = "hola";
+        System.out.println(esPalindromo(palindromo));
+        System.out.println(esPalindromo(noPalindromo));
+
+    }
+
+    public static void insert(char[] queue, int tail, int max, char c) {
+        if (tail < max) {
+            queue[tail] = c;
+            tail++;
+        } else {
+            System.out.println("La cola está llena");
+        }
+    }
+
+    public static char remove(char[] queue, int tail) {
+        if (tail > 0) {
+            char c = queue[0];
+            for (int i = 1; i < tail; i++) {
+                queue[i - 1] = queue[i];
+            }
+            tail--;
+            return c;
+        } else {
+            System.out.println("La cola está vacía");
+            return '#';
+        }
+    }
+
+    public static void push(char[] stack, int top, char c) {
+        if (top < stack.length) {
+            stack[top] = c;
+            top++;
+        } else {
+            System.out.println("El stack está lleno");
+        }
+    }
+
+    public static char pop(char[] stack, int top) {
+        if (top > 0) {
+            top--;
+            char c = stack[top];
+            return c;
+        } else {
+            System.out.println("El stack está vacío");
+            return '#';
+        }
+    }
+
+    public static String invertirStringConStack(String entrada) {
+        Stack<Character> pila = new Stack<Character>();
+        for (int i = 0; i < entrada.length(); i++) {
+            pila.push(entrada.charAt(i));
+        }
+        String resultado = "";
+        while (!pila.isEmpty()) {
+            resultado += pila.pop();
+        }
+        return resultado;
+    }
+
+    public static boolean esPalindromo(String entrada) {
+        Stack<Character> pila = new Stack<Character>();
+        for (int i = 0; i < entrada.length(); i++) {
+            pila.push(entrada.charAt(i));
+        }
+        String invertido = "";
+        while (!pila.isEmpty()) {
+            invertido += pila.pop();
+        }
+        return entrada.equals(invertido);
+    }
+
+}
+
